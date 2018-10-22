@@ -30,7 +30,8 @@ img1_ch_R = img2[:, :, 0]
 img1_ch_G = img1[:, :, 1]
 img1_ch_B = img1[:, :, 2]
 #   RGB_channel_mask = otsu(img_channel)
-img1_mask_R = ot.histogram(img1_ch_R)
+img1_mask_R_hist = ot.histogram(img1_ch_R)
+img1_mask_R = ot.apply_otsu(img1_mask_R_hist)
 #   AND channels for final mask
 #   refine and display
 

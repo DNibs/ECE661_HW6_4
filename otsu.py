@@ -36,14 +36,20 @@ def apply_otsu(hist_n):
     w1 = np.zeros(L)
     mu0 = np.zeros(L)
     mu1 = np.zeros(L)
+    sigma=np.zeros(L)
+    hist_i = np.arange(L)
 
     # Iterate each illum - calculate class prob, mean, between-class variance
     for k in range(0, L):
         w0[k] = np.sum(hist_p[0:k])
         w1[k] = 1 - w0[k]
-
+        mu0 = np.sum(np.multiply(hist_p[0:k], hist_i[0:k])) / w0[k]
+        mu1 = np.sum(hist_p[k+1:L] * hist_i[k+1:L]) / w1[k]
+        sigma[k] = w0[k] * w1[k] * np.square((mu0[k]-mu1[k]))
 
     # Choose k that corresponds to max between-class variance
+    max_k = np.argmax(sigma[k])
+    print('max_k {}'.format(max_k))
 
 # Create mask
 #   iterate over image; if pixel > k, set mask to 1
