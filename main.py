@@ -13,6 +13,7 @@
 import cv2
 import numpy as np
 import otsu as ot
+import matplotlib.pyplot as plt
 
 
 # Load images from file
@@ -26,12 +27,17 @@ img3_g = cv2.imread('ski.jpg', 0)
 
 # Apply mask using RGB
 #   get channels
-img1_ch_R = img2[:, :, 0]
+img1_ch_R = img1[:, :, 0]
 img1_ch_G = img1[:, :, 1]
 img1_ch_B = img1[:, :, 2]
 #   RGB_channel_mask = otsu(img_channel)
 img1_mask_R_hist = ot.histogram(img1_ch_R)
-img1_mask_R = ot.apply_otsu(img1_mask_R_hist)
+img1_mask_R_val = ot.apply_otsu(img1_mask_R_hist)
+img1_mask_R = ot.create_mask(img1_ch_R, img1_mask_R_val)
+
+plt.imshow(img1_mask_R)
+plt.show()
+
 #   AND channels for final mask
 #   refine and display
 
