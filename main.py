@@ -12,13 +12,25 @@
 
 import cv2
 import numpy as np
+import otsu as ot
 
 
 # Load images from file
+img1 = cv2.imread('baby.jpg', 1)
+img2 = cv2.imread('lighthouse.jpg', 1)
+img3 = cv2.imread('ski.jpg', 1)
+img1_g = cv2.imread('baby.jpg', 0)
+img2_g = cv2.imread('lighthouse.jpg', 0)
+img3_g = cv2.imread('ski.jpg', 0)
 
 
 # Apply mask using RGB
+#   get channels
+img1_ch_R = img2[:, :, 0]
+img1_ch_G = img1[:, :, 1]
+img1_ch_B = img1[:, :, 2]
 #   RGB_channel_mask = otsu(img_channel)
+img1_mask_R = ot.histogram(img1_ch_R)
 #   AND channels for final mask
 #   refine and display
 
